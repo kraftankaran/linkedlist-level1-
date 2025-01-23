@@ -226,6 +226,8 @@
 
 import java.util.*;
 
+
+
 public class linklist {
 
     public static class Node {
@@ -239,7 +241,7 @@ public class linklist {
     }
 
     public static class LinkedList {
-        Node head;
+         public Node head;
         Node tail;
         int size;
 
@@ -362,6 +364,160 @@ public class linklist {
                 size--;
             }
         }
+
+        public Node KthNodeFromLast(int k){
+            Node slow = head;
+            Node fast= head;
+            while (k>0) {
+                fast = fast.next;
+                k--;
+
+                
+            }
+            while (fast!=null) {
+                fast=fast.next;
+                slow = slow.next;
+                
+            }
+            return slow;
+
+//      public Node KthNodeFromLast(int k) {
+//     if (head == null || k <= 0) {
+//         System.out.println("Invalid input or empty list");
+//         return null;
+//     }
+
+//     Node slow = head;
+//     Node fast = head;
+
+//     // Move `fast` k steps ahead
+//     for (int i = 0; i < k; i++) {
+//         if (fast == null) { // If k > size of the list
+//             System.out.println("k is greater than the size of the list");
+//             return null;
+//         }
+//         fast = fast.next;
+//     }
+
+//     // Move `fast` and `slow` together until `fast` reaches the end
+//     while (fast != null) {
+//         fast = fast.next;
+//         slow = slow.next;
+//     }
+
+//     // `slow` now points to the k-th node from the end
+//     return slow;
+// }
+
+            
+
+          
+            
+
+
+
+            // 
+        }
+
+
+        public Node Mid(Node head){
+            Node f = head;
+            Node slow= head;
+            while(f.next!=null || f.next.next!=null){
+                slow=slow.next;
+                f= f.next.next;
+
+            }
+            return slow;
+
+        }
+
+        public  static LinkedList MergeTwoSortedLL(LinkedList l1, LinkedList l2){
+           LinkedList result = new LinkedList();
+            Node one = l1.head;
+            Node two= l2.head;
+            while (one!=null && two!=null) {
+                if(one.data>two.data){
+                    result.addLast(two.data);
+                    two= two.next;
+                }
+                else {
+                    result.addLast(one.data);
+                    one = one.next;
+                }
+                
+            }
+            while (one!=null) {
+                result.addLast(one.data);
+                one = one.next;
+
+                
+            }
+            while (two !=null) {
+                result.addLast(two.data);
+                two= two.next;
+                
+            }
+
+
+
+            return result;
+
+        }
+        public static Node middleNode( Node head, Node tail){
+
+            Node fast = head;
+            Node slow = head;
+            while (fast.next!=null && fast.next.next!=null) {
+                fast = fast.next.next;
+                slow = slow.next;
+
+                
+            }
+            return slow;
+
+            
+
+        }
+        public LinkedList MergeSort(Node head, Node tail){
+
+            if(head == tail){
+                LinkedList baselist = new LinkedList();
+                baselist.addLast(head.data);
+                return baselist;
+            }
+
+
+
+            Node Mid =  middleNode(head, tail);
+        
+            LinkedList left = MergeSort(head, Mid);
+            LinkedList right = MergeSort(Mid.next, tail);
+            LinkedList sortedList  = MergeTwoSortedLL(left, right);
+
+
+            return sortedList;
+
+
+
+        }
+
+        public void removeDuplicateInSortedList(){
+            Node curr = head;
+            while (curr!=null && curr.next!=null) {
+                if(curr.data == curr.next.data){
+                    curr.next = curr.next.next;
+                }else
+                {
+                    curr = curr.next;
+                    
+                }
+                
+            }
+
+        }
+
+
     }
 
     public static void main(String[] args) {
